@@ -10,6 +10,10 @@
 struct Terminal
 {
   bool isOutput;
+  /**
+   * @brief Connection number
+   *
+   */
   unsigned short conn_num;
   /**
    * @brief 0 - Low, 1 - High, 2 - Undefined
@@ -128,7 +132,11 @@ struct Gate
    *
    * @param terms contents
    */
-  Gate(Terminal terms[N]) : terminals{terms}, size{N} {};
+  Gate(Terminal terms[N]) : size{N}
+  {
+    for (size_t i = 0; i < N; i++)
+      terminals[i] = terms[i];
+  };
   /**
    * @brief Construct a new Gate object
    *
@@ -216,7 +224,8 @@ struct Gate
     for (size_t i = 0; i < size; i++)
     {
       std::cout << "Enter state for terminal#" << i + 1 << (terminals[i].isOutput ? " (Output)>" : " (Input)>");
-      stream >> terminals[i].state;
+      //stream >> terminals[i].state;
+      terminals[i].input(stream);
     }
     return stream;
   }
@@ -232,11 +241,11 @@ struct Gate
     stream << "Inputs:  ";
     for (size_t i = 0; i < size; i++)
       if (!terminals[i].isOutput)
-        stream << (((terminals[i].state == 2) ? "  X   " : (terminals[i].state?" High ":" Low  ")));
+        stream << (((terminals[i].state == 2) ? "  X   " : (terminals[i].state ? " High " : " Low  ")));
     stream << "\nOutputs: ";
     for (size_t i = 0; i < size; i++)
       if (terminals[i].isOutput)
-        stream << (((terminals[i].state == 2) ? "  X   " : (terminals[i].state?" High ":" Low  ")));
+        stream << (((terminals[i].state == 2) ? "  X   " : (terminals[i].state ? " High " : " Low  ")));
     return stream;
   }
 };

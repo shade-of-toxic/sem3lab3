@@ -74,7 +74,11 @@ struct Gate
     for (size_t i = in; i < (size = in + out); i++)
       terminals[i] = Terminal(true, 0, 0);
   }
-  Gate(Terminal terms[N]) : terminals{terms}, size{N} {};
+  Gate(Terminal terms[N])
+  {
+    for (size = 0; size < N; size++)
+      terminals[size] = terms[size];
+  };
 
   unsigned short const& operator()(size_t n, unsigned short val)
   {

@@ -177,6 +177,7 @@ struct Gate
     terminals.reset(new Terminal[gt.size]);
     for (size_t i = 0; i < size; i++)
       terminals[i] = gt.terminals[i];
+    return *this;
   }
   /**
    * @brief Set terminal's state by index n

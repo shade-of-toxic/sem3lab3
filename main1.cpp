@@ -1,8 +1,7 @@
 #include "LogicGate.hpp"
 #include <map>
 constexpr size_t SIZE = Gate::N;
-typedef Gate LogicGate;
-typedef std::map<std::string, LogicGate> GateMap;
+typedef std::map<std::string, Gate> GateMap;
 
 void exit(GateMap& lg, std::string& sel) { exit(0); }
 void new_gate(GateMap& lg, std::string& sel)
@@ -30,7 +29,7 @@ void new_gate(GateMap& lg, std::string& sel)
     std::cout << "Do you want to continue?(0_/1) > ";
     std::cin >> ch;
   }
-  lg[name] = LogicGate(terms);
+  lg[name] = Gate(terms);
   sel      = name;
   std::cout << "Successfully created!";
 }
@@ -50,7 +49,7 @@ void list_gates(GateMap& lg, std::string& sel)
 {
   for (auto& keyval : lg)
   {
-    std::cout << keyval.first << (&*lg.rbegin() == &keyval ? "" : ", ");
+    std::cout << keyval.first << " ";
   }
   std::cout << "\n";
 }
@@ -73,7 +72,7 @@ void select_gate(GateMap& lg, std::string& sel)
 void add_terminals(GateMap& lg, std::string& sel)
 {
   char ch = '1';
-  while (ch == '1' && lg[sel].size != SIZE)
+  while (ch == '1')
   {
     std::cout << "Input iotype ('in':'out'): ";
     std::string ans;
@@ -102,7 +101,7 @@ void add_terminals(GateMap& lg, std::string& sel)
 
 void get_term_state(GateMap& lg, std::string& sel)
 {
-  size_t pos;
+  size_t pos = lg[sel].size;
   while (pos >= lg[sel].size)
   {
     std::cout << "Input terminal number (from 0 to " << lg[sel].size - 1 << "): ";
@@ -114,7 +113,7 @@ void get_term_state(GateMap& lg, std::string& sel)
 
 void set_term_state(GateMap& lg, std::string& sel)
 {
-  size_t pos;
+  size_t pos = lg[sel].size;
   while (pos >= lg[sel].size)
   {
     std::cout << "Input terminal number (from 0 to " << lg[sel].size - 1 << "): ";
@@ -129,7 +128,7 @@ void set_term_state(GateMap& lg, std::string& sel)
 
 void connect_term(GateMap& lg, std::string& sel)
 {
-  size_t pos;
+  size_t pos = lg[sel].size;
   while (pos >= lg[sel].size)
   {
     std::cout << "Input terminal number (from 0 to " << lg[sel].size - 1 << "): ";
@@ -141,13 +140,13 @@ void connect_term(GateMap& lg, std::string& sel)
   }
   catch (std::out_of_range& e)
   {
-    std::cout << e.what() << std::endl;
+    std::cerr << e.what() << std::endl;
   }
 }
 
 void disconnect_term(GateMap& lg, std::string& sel)
 {
-  size_t pos;
+  size_t pos = lg[sel].size;
   while (pos >= lg[sel].size)
   {
     std::cout << "Input terminal number (from 0 to " << lg[sel].size - 1 << "): ";
@@ -159,7 +158,7 @@ void disconnect_term(GateMap& lg, std::string& sel)
   }
   catch (std::out_of_range& e)
   {
-    std::cout << e.what() << std::endl;
+    std::cerr << e.what() << std::endl;
   }
 }
 
@@ -173,7 +172,7 @@ int main()
 {
   GateMap gates;
   std::string selected = "invertor";
-  gates["invertor"]    = LogicGate{};
+  gates["invertor"]    = Gate{};
 
   while (1)
   {
