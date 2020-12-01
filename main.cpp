@@ -48,7 +48,7 @@ void list_gates(GateMap& lg, std::string& sel)
 {
   for (auto& keyval : lg)
   {
-    std::cout << keyval.first << (&*lg.rbegin() == &keyval ? "" : ", ");
+    std::cout << keyval.first << " ";
   }
   std::cout << "\n";
 }
@@ -88,7 +88,7 @@ void add_terminals(GateMap& lg, std::string& sel)
     {
       lg[sel] += std::move(term);
     }
-    catch (std::runtime_error& e)
+    catch (std::bad_alloc& e)
     {
       std::cerr << e.what() << std::endl;
       return;
@@ -100,7 +100,7 @@ void add_terminals(GateMap& lg, std::string& sel)
 
 void get_term_state(GateMap& lg, std::string& sel)
 {
-  size_t pos;
+  size_t pos = lg[sel].size;
   while (pos >= lg[sel].size)
   {
     std::cout << "Input terminal number (from 0 to " << lg[sel].size - 1 << "): ";
@@ -112,7 +112,7 @@ void get_term_state(GateMap& lg, std::string& sel)
 
 void set_term_state(GateMap& lg, std::string& sel)
 {
-  size_t pos;
+  size_t pos = lg[sel].size;
   while (pos >= lg[sel].size)
   {
     std::cout << "Input terminal number (from 0 to " << lg[sel].size - 1 << "): ";
