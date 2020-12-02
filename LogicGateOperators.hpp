@@ -1,5 +1,5 @@
 #include <iostream>
-#include <memory>
+//#include <memory>
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -8,9 +8,8 @@ struct Terminal
 {
   bool isOutput;
   unsigned short conn_num;
-  /**
-   * @brief 0 - Low, 1 - High, 2 - Undefined
-   *
+  /*
+  0 - Low, 1 - High, 2 - Undefined
    */
   unsigned short state;
 
