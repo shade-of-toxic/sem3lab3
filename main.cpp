@@ -168,13 +168,13 @@ void (*options[])(GateMap&, std::string&) = {exit,           new_gate,     remov
                                              set_term_state, connect_term, disconnect_term, renew_states};
 int main()
 {
-    GateMap gates;
-    std::string selected = "invertor";
-    gates["invertor"] = Gate{};
+  GateMap gates;
+  std::string selected = "invertor";
+  gates["invertor"]    = Gate{};
 
-    while (1)
-    {
-        std::cout << "Ask... \n\
+  while (1)
+  {
+    std::cout << "Ask... \n\
     [1]Exit\n\
     [2]New gate\n\
     [3]Remove gate\n\
@@ -187,19 +187,19 @@ int main()
     [10]Connect terminal\n\
     [11]Disconnect terminal\n\
     [12]Renew satates\n"
-            ">>";
-        int choice;
-        std::cin >> choice;
-        if (choice > sizeof(options) / sizeof(options[0]) || choice <= 0)
-        {
-            std::cin.clear();
-            char tmp = '\0';
-            while (tmp != '\n')
-                tmp = std::cin.get();
-            std::cout << "Try again!\n";
-            continue;
-        }
-        options[choice - 1](gates, selected);
-        std::cout << std::endl;
+                 ">>";
+    int choice;
+    std::cin >> choice;
+    if (choice > sizeof(options) / sizeof(options[0]) || choice <= 0)
+    {
+      std::cin.clear();
+      char tmp = '\0';
+      while (tmp != '\n')
+        tmp = std::cin.get();
+      std::cout << "Try again!\n";
+      continue;
     }
+    options[choice - 1](gates, selected);
+    std::cout << std::endl;
+  }
 }

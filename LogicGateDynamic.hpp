@@ -74,10 +74,7 @@ class Gate
    *
    */
 public:
-
-  inline size_t size() {
-    return _size;
-  }
+  inline size_t size() { return _size; }
   Gate();
   /**
    *  Construct a new Gate object

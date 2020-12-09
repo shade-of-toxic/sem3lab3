@@ -44,7 +44,5 @@ public:
   friend std::istream& operator>>(std::istream& stream, Gate& gate);
 
   friend std::ostream& operator<<(std::ostream& stream, Gate& gate);
-  inline size_t const& size() const {
-      return _size;
-  }
+  inline size_t const& size() const { return _size; }
 };

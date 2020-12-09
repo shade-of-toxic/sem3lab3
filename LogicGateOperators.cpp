@@ -66,10 +66,10 @@ Gate::Gate(Terminal terms[], size_t terms__size)
 
 Gate::Gate(std::vector<Terminal>& terms)
 {
-    for (_size = 0; _size < N && _size < terms.size(); _size++)
-    {
-        terminals[_size] = terms[_size];
-    }
+  for (_size = 0; _size < N && _size < terms.size(); _size++)
+  {
+    terminals[_size] = terms[_size];
+  }
 }
 
 unsigned short const& Gate::operator()(size_t n, unsigned short val)
